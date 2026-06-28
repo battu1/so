@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import LeadPopup from '@/components/LeadPopup';
 import {
   ArrowRight, BadgeCheck, BarChart3, Check, Code2, ExternalLink,
   Gauge, Instagram, Linkedin, Mail, MapPin, Menu, MessageCircle,
@@ -30,18 +31,20 @@ const process = [
 export default function Home() {
   return (
     <main>
+      <LeadPopup />
       <nav className="nav shell" aria-label="Main navigation">
         <a className="brand" href="#top" aria-label="LocalSync home">
           <Image src="/localsync-logo.jpg" alt="" width={52} height={52} priority />
           <span>LOCAL<span>SYNC</span></span>
         </a>
         <div className="navLinks">
-          <a href="#services">Services</a><a href="#work">Work</a><a href="#process">Process</a><a href="#about">About</a>
+          <a href="#services">Services</a><a href="#process">Process</a><a href="#about">About</a>
         </div>
-        <a className="button buttonSm" href="#contact">Start a project <ArrowRight size={16} /></a>
+        {/* data-open-lead is handled by LeadPopup; href remains a useful no-JavaScript fallback. */}
+        <a className="button buttonSm" href="#contact" data-open-lead>Start a project <ArrowRight size={16} /></a>
         <details className="mobileNav">
           <summary aria-label="Open navigation"><Menu /></summary>
-          <div><a href="#services">Services</a><a href="#work">Work</a><a href="#process">Process</a><a href="#about">About</a><a href="#contact">Start a project</a></div>
+          <div><a href="#services">Services</a><a href="#work">Work</a><a href="#process">Process</a><a href="#about">About</a><a href="#contact" data-open-lead>Start a project</a></div>
         </details>
       </nav>
 
@@ -51,8 +54,7 @@ export default function Home() {
           <h1>Your business<br />deserves to be<br /><em>found & chosen.</em></h1>
           <p>LocalSync creates fast, refined websites that turn local attention into real enquiries, bookings and growth.</p>
           <div className="heroActions">
-            <a className="button" href="#contact">Build your website <ArrowRight size={18} /></a>
-            <a className="textLink" href="#work">See our work <span>↘</span></a>
+            <a className="button" href="#contact" data-open-lead>Build your website <ArrowRight size={18} /></a>
           </div>
           <div className="heroProof">
             <div className="avatars"><span>R</span><span>A</span><span>K</span></div>
@@ -100,17 +102,27 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section shell" id="work">
-        <div className="sectionHead"><div><div className="kicker">SELECTED CONCEPTS</div><h2>Built to look good.<br /><em>Made to work hard.</em></h2></div><p>Every LocalSync build connects thoughtful design to a clear business goal.</p></div>
-        <div className="projects">{projects.map((project) => <article className={`project ${project.className}`} key={project.name}><div className="projectTag">{project.type}</div><div className="projectScreen"><div className="miniBar"/><h3>{project.name}</h3><p>{project.type === 'Local bakery' ? 'Baked here. Loved here.' : project.type === 'Wellness studio' ? 'Move with intention.' : 'A cleaner kind of clean.'}</p><span>Discover more</span></div><div className="projectMeta"><h3>{project.name}</h3><span>{project.result}</span><ExternalLink size={18}/></div></article>)}</div>
-        <p className="conceptNote">Concept showcases created to demonstrate our design direction and capabilities.</p>
-      </section>
+
 
       <section className="process section" id="process"><div className="shell"><div className="sectionHead"><div><div className="kicker">HOW IT WORKS</div><h2>A clear path from<br />idea to <em>online.</em></h2></div><p>No mystery, no agency runaround. A simple process with steady collaboration at every stage.</p></div><div className="processGrid">{process.map(([n,t,d]) => <div className="processItem" key={n}><span>{n}</span><Sparkles size={20}/><h3>{t}</h3><p>{d}</p></div>)}</div></div></section>
 
-      <section className="quote shell"><div className="quoteMark">“</div><blockquote>LocalSync understood that we didn’t just need a prettier website—we needed a clearer way for customers to trust us and take the next step.</blockquote><div className="quoteBy"><div>AS</div><p><b>Ananya S.</b><br />Small business owner</p><span>★★★★★</span></div></section>
+      
 
-      <section className="contact" id="contact"><div className="shell contactGrid"><div><div className="kicker light">READY WHEN YOU ARE</div><h2>Let’s build something<br />your business can<br /><em>grow into.</em></h2><p>Tell us what you’re working on. We’ll reply with thoughtful next steps—usually within one business day.</p><div className="availability"><i/> Currently accepting new projects</div></div><div className="contactCard"><h3>Start a conversation</h3><a href="mailto:hello@localsync.in"><Mail/><span><small>Email us</small>hello@localsync.in</span><ArrowRight/></a><a href="https://wa.me/919876543210"><MessageCircle/><span><small>WhatsApp</small>+91 98765 43210</span><ArrowRight/></a><div className="location"><MapPin/><span><small>Based in India</small>Working with businesses everywhere</span></div><hr/><p>Prefer social?</p><div className="socials"><a href="https://instagram.com/localsync" aria-label="Instagram"><Instagram/></a><a href="https://linkedin.com/company/localsync" aria-label="LinkedIn"><Linkedin/></a><a href="mailto:hello@localsync.in" aria-label="Email"><Mail/></a></div></div></div></section>
+      <section className="contact" id="contact"><div className="shell contactGrid"><div><div className="kicker light">READY WHEN YOU ARE</div><h2>Let’s build something<br />your business can<br /><em>grow into.</em></h2><p>Tell us what you’re working on. We’ll reply with thoughtful next steps—usually within one business day.</p><div className="availability"><i/> Currently accepting new projects</div></div>
+      <div className="contactCard">
+      <h3>Start a conversation</h3><a href="mailto:localsynctechnologies@gmail.com">
+      <Mail/><span><small>Email us</small>localsynctechnologies@gmail.com</span>
+      <ArrowRight/></a>
+      <div className="location"><MapPin/><span><small>Based in India</small>
+      Working with businesses everywhere</span></div><hr/><p>Prefer social?</p>
+      <div className="socials"><a href="https://www.instagram.com/localsynctechnologies" aria-label="Instagram">
+      <Instagram/></a><a href="https://www.linkedin.com/company/localsyntech/" aria-label="LinkedIn">
+      <Linkedin/></a><a href="mailto:localsynctechnologies@gmail.com" aria-label="Email">
+      <Mail/></a>
+      </div>
+
+      
+      </div></div></section>
 
       <footer><div className="shell footerTop"><a className="brand brandLight" href="#top"><Image src="/localsync-logo.jpg" alt="" width={46} height={46}/><span>LOCAL<span>SYNC</span></span></a><p>Connecting your business<br />to the modern world.</p><div><a href="#services">Services</a><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a></div></div><div className="shell footerBottom"><span>© 2026 LocalSync. All rights reserved.</span><span>Designed for local growth <BarChart3 size={14}/></span></div></footer>
     </main>
